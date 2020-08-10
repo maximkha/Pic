@@ -1,6 +1,8 @@
 import numpy as np
 from numpy.lib.type_check import imag
 
+IMNAME = 'WIN_20200729_14_44_11_Pro.jpg'
+
 def diffImg(image, offsetX, offsetY):
     W, H, C = image.shape
     #W = image.shape[0]
@@ -36,7 +38,7 @@ import numba
 fastDiff = numba.jit(numba.int32[:,:,:](numba.int32[:,:,:], numba.int32, numba.int32))(diffImg)
 
 from PIL import Image
-imgArr = np.array(Image.open('WIN_20200729_14_44_11_Pro.jpg'))
+imgArr = np.array(Image.open(IMNAME))
 
 output = fastDiff(imgArr.astype(np.int32), -1, 1).astype(np.uint8)
 
